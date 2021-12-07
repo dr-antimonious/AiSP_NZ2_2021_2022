@@ -9,17 +9,40 @@ namespace AiSP_NZ2_2021_2022
         {
             string input;
             input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input) || string.IsNullOrWhiteSpace(input) || input.Length > 5000)
+                throw new NotImplementedException();
 
-            char[] data = new char[input.Length];
             int i = 0;
-            foreach (char c in input)
+
+            bool[] brojeviCheck = new bool[input.Length];
+            for (i = 0; i < input.Length; i++)
+                brojeviCheck[i] = false;
+
+            List<int> brojevi = new List<int>();
+            i = 0;
+            foreach(char c in input)
             {
-                data[i] = c;
+                if (char.IsNumber(c))
+                {
+                    brojeviCheck[i] = true;
+                }
                 i++;
             }
-            foreach(char s in data) Console.WriteLine(s);
-
-
+            for (i = 0; i < brojeviCheck.Length; i++)
+            {
+                string temp = string.Empty;
+                while (brojeviCheck[i])
+                {
+                    temp += input[i];
+                    i++;
+                }
+                if (!string.IsNullOrEmpty(temp)) brojevi.Add(Int32.Parse(temp));
+            }
+            foreach (int integer in brojevi)
+                Console.WriteLine(integer);
         }
+
+        //public int Multiply()
+        //public int Zagrade()
     }
 }
